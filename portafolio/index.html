@@ -58,6 +58,26 @@
       margin-bottom: 1rem;
       text-transform: uppercase;
     }
+    .featured-grid { margin-bottom: 5rem; }
+    .featured-card {
+      min-height: 260px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 3rem;
+      padding: 2.5rem;
+      border-color: rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 35px rgba(0, 255, 255, 0.08);
+    }
+    .featured-card i { font-size: 3rem; color: var(--accent-color); margin-bottom: 1.5rem; }
+    .featured-card h2 { font-size: 2.2rem; margin-bottom: 0.8rem; }
+    .featured-card p { max-width: 720px; color: var(--text-secondary); line-height: 1.7; }
+    .featured-card .btn-primary { white-space: nowrap; }
+    @media (max-width: 700px) {
+      .portfolio-section { padding-inline: 1rem; }
+      .featured-card { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem; }
+      .featured-card .btn-primary { justify-content: center; }
+    }
   </style>
   <script type="module">
     import { initProtection } from '/src/js/utils/protection.js';
@@ -78,6 +98,8 @@
       <h1 style="font-size: 3rem; margin-bottom: 1rem;">Mi Portafolio</h1>
       <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Explora mis herramientas personalizadas, proyectos destacados y mi tienda de plantillas exclusivas.</p>
     </header>
+
+    <div id="featured-grid" class="featured-grid"></div>
 
     <!-- Sección Herramientas -->
     <div class="section-title">
@@ -115,6 +137,7 @@
       
       const toolsGrid = document.getElementById('tools-grid');
       const projectsGrid = document.getElementById('projects-grid');
+      const featuredGrid = document.getElementById('featured-grid');
 
       const createCard = (item) => {
         const card = document.createElement('div');
@@ -131,8 +154,26 @@
         return card;
       };
 
+      const featured = data.proyectos.find(item => item.id === 'lalia');
+      if (featured) {
+        const card = document.createElement('article');
+        card.className = 'glass featured-card';
+        card.innerHTML = `
+          <div>
+            <span class="badge">${featured.badge}</span>
+            <i class="${featured.icono}"></i>
+            <h2>${featured.nombre}</h2>
+            <p>${featured.descripcion}</p>
+          </div>
+          <a href="${featured.url}" class="btn-primary">Conocer LalIA</a>
+        `;
+        featuredGrid.appendChild(card);
+      }
+
       data.herramientas.forEach(item => toolsGrid.appendChild(createCard(item)));
-      data.proyectos.forEach(item => projectsGrid.appendChild(createCard(item)));
+      data.proyectos
+        .filter(item => item.id !== 'lalia')
+        .forEach(item => projectsGrid.appendChild(createCard(item)));
     }
 
     window.addEventListener("load", () => {

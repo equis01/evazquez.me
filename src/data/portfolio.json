@@ -30,17 +30,17 @@
       "id": "lalia",
       "nombre": "LalIA",
       "descripcion": "Una plataforma de inteligencia artificial modular que conversa, crea contenido, analiza y convierte ideas en aplicaciones.",
-      "url": "/lalia",
+      "url": "/lalia/",
       "icono": "fas fa-wand-magic-sparkles",
       "badge": "Inteligencia artificial"
     },
     {
       "id": "chula-style",
       "nombre": "Chula Style",
-      "descripcion": "Página interactiva de romance para tu pareja.",
+      "descripcion": "Página interactiva para regalarle flores virtuales a mi novia y sorprenderla con un detalle personal.",
       "url": "/portafolio/proyectos/chula/",
-      "icono": "fas fa-shopping-bag",
-      "badge": "Portfolio"
+      "icono": "fas fa-seedling",
+      "badge": "Detalle personal"
     },
     {
       "id": "portfolio-aurora",

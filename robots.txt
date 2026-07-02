@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /public/analytics/
+Disallow: /portafolio/shop/viewer
+
+Sitemap: https://evamtz.me/sitemap.xml

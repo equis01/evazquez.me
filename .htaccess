@@ -7,7 +7,7 @@ RewriteRule ^cuidado/animal/privacidad/?$ /public/analytics/animal/privacidad.ht
 RewriteRule ^cuidado/animal/tratamiento-datos/?$ /public/analytics/animal/tratamiento-datos.html [L]
 RewriteRule ^tours/?$ /public/analytics/tours/index.html [L]
 RewriteRule ^tours/privacidad/?$ /public/analytics/tours/privacidad.html [L]
-RewriteRule ^lalia/?$ /portafolio/proyectos/lalia/index.html [L]
+RewriteRule ^lalia/?$ /lalia/index.html [L]
 
 # Quitar extensión .html
 RewriteCond %{REQUEST_FILENAME} !-d

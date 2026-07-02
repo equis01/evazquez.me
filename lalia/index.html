@@ -156,6 +156,27 @@
     <a href="/portafolio/" class="nav-link"><i class="fas fa-arrow-left"></i><span>Portafolio</span></a>
   </nav>
 
+  <button class="chat-launcher" id="chat-launcher" type="button" aria-label="Abrir chat sobre LalIA" aria-expanded="false" aria-controls="lalia-chat">
+    <i class="fas fa-comments"></i>
+  </button>
+
+  <aside class="glass lalia-chat" id="lalia-chat" aria-label="Chat informativo de LalIA" aria-hidden="true">
+    <header class="chat-header">
+      <div class="chat-avatar"><i class="fas fa-wand-magic-sparkles"></i></div>
+      <div><strong>LalIA</strong><span><i></i> Guía del proyecto</span></div>
+      <button type="button" id="chat-close" aria-label="Cerrar chat"><i class="fas fa-xmark"></i></button>
+    </header>
+    <div class="chat-messages" id="chat-messages" aria-live="polite">
+      <div class="guide-message">Hola. Puedo contarte rápidamente qué es LalIA. Elige una pregunta para comenzar.</div>
+    </div>
+    <div class="chat-questions" id="chat-questions" aria-label="Preguntas disponibles">
+      <button type="button" data-question="capabilities">¿Qué puede hacer?</button>
+      <button type="button" data-question="operation">¿Cómo funciona?</button>
+      <button type="button" data-question="audience">¿Quién puede usarlo?</button>
+      <button type="button" data-question="purpose">¿Para qué sirve?</button>
+    </div>
+  </aside>
+
   <footer>© <span id="year"></span> Eduardo Vázquez · LalIA</footer>
 
   <dialog class="glass demo-dialog" id="demo-dialog" aria-labelledby="dialog-title">

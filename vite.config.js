@@ -1,11 +1,26 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import { readFileSync } from 'fs';
+
+const seoFilesPlugin = {
+  name: 'seo-files',
+  generateBundle() {
+    for (const fileName of ['robots.txt', 'sitemap.xml']) {
+      this.emitFile({
+        type: 'asset',
+        fileName,
+        source: readFileSync(resolve(__dirname, fileName), 'utf8'),
+      });
+    }
+  },
+};
 
 export default defineConfig({
   root: './',
   // Desactivamos el mapeo automático de public para que funcione 
   // con rutas relativas manuales como /public/img/...
-  publicDir: false, 
+  publicDir: false,
+  plugins: [seoFilesPlugin],
   build: {
     outDir: 'dist',
     rollupOptions: {
@@ -31,7 +46,7 @@ export default defineConfig({
         cv: resolve(__dirname, 'cv/index.html'),
         qr: resolve(__dirname, 'portafolio/herramientas/qr-gen/index.html'),
         chula: resolve(__dirname, 'portafolio/proyectos/chula/index.html'),
-        lalia: resolve(__dirname, 'portafolio/proyectos/lalia/index.html'),
+        lalia: resolve(__dirname, 'lalia/index.html'),
         404: resolve(__dirname, '404.html'),
       }
     }

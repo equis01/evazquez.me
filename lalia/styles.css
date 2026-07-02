@@ -133,6 +133,60 @@ button { font: inherit; }
 .closing-section p { max-width: 600px; margin-bottom: 2rem; }
 footer { padding: 2rem 1rem 1rem; color: var(--text-secondary); text-align: center; font-size: .8rem; }
 
+.chat-launcher {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 1002;
+  width: 54px;
+  height: 54px;
+  border: 1px solid var(--accent-color);
+  border-radius: 50%;
+  background: #080808;
+  color: var(--accent-color);
+  box-shadow: 0 0 24px var(--accent-glow);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: transform .25s ease, background .25s ease;
+}
+.chat-launcher:hover { transform: translateY(-3px); background: rgba(0,255,255,.1); }
+.lalia-chat {
+  position: fixed;
+  right: 2rem;
+  bottom: 6.5rem;
+  z-index: 1003;
+  width: min(390px, calc(100vw - 2rem));
+  max-height: min(610px, calc(100vh - 9rem));
+  display: grid;
+  grid-template-rows: auto minmax(170px, 1fr) auto;
+  background: rgba(7,7,7,.96);
+  box-shadow: 0 18px 65px rgba(0,0,0,.6), 0 0 28px rgba(0,255,255,.08);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px) scale(.98);
+  transform-origin: bottom right;
+  transition: opacity .22s ease, visibility .22s ease, transform .22s ease;
+}
+.lalia-chat.open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+.chat-header { min-height: 68px; padding: .85rem 1rem; display: grid; grid-template-columns: 42px 1fr 34px; align-items: center; gap: .75rem; border-bottom: 1px solid var(--glass-border); }
+.chat-avatar { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; color: var(--accent-color); background: rgba(0,255,255,.08); }
+.chat-header strong { display: block; }
+.chat-header span { display: flex; align-items: center; gap: .4rem; margin-top: .18rem; color: var(--text-secondary); font-size: .73rem; }
+.chat-header span i { width: 6px; height: 6px; border-radius: 50%; background: #42ff9c; box-shadow: 0 0 8px #42ff9c; }
+.chat-header button { width: 34px; height: 34px; border: 0; background: transparent; color: var(--text-secondary); cursor: pointer; }
+.chat-messages { padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: .75rem; }
+.guide-message, .user-message { max-width: 88%; padding: .8rem .9rem; border-radius: 12px; font-size: .86rem; line-height: 1.55; }
+.guide-message { align-self: flex-start; color: var(--text-secondary); background: rgba(255,255,255,.045); border: 1px solid var(--glass-border); border-bottom-left-radius: 3px; }
+.user-message { align-self: flex-end; color: var(--text-primary); background: rgba(0,255,255,.09); border: 1px solid rgba(0,255,255,.22); border-bottom-right-radius: 3px; }
+.chat-typing { align-self: flex-start; display: flex; gap: 4px; padding: .8rem 1rem; border: 1px solid var(--glass-border); border-radius: 12px; }
+.chat-typing span { width: 5px; height: 5px; border-radius: 50%; background: var(--accent-color); animation: blink 1s infinite alternate; }
+.chat-typing span:nth-child(2) { animation-delay: .2s; }
+.chat-typing span:nth-child(3) { animation-delay: .4s; }
+.chat-questions { padding: .85rem; border-top: 1px solid var(--glass-border); display: flex; flex-wrap: wrap; gap: .5rem; }
+.chat-questions button { padding: .58rem .7rem; border: 1px solid rgba(0,255,255,.24); border-radius: 9px; background: rgba(0,255,255,.04); color: var(--accent-color); cursor: pointer; font-size: .76rem; transition: background .2s ease; }
+.chat-questions button:hover, .chat-questions button:focus-visible { background: rgba(0,255,255,.12); }
+
 .demo-dialog { width: min(660px, calc(100% - 2rem)); padding: 2.5rem; color: var(--text-primary); background: rgba(8,8,8,.94); box-shadow: 0 0 50px var(--accent-glow); }
 .demo-dialog::backdrop { background: rgba(0,0,0,.76); backdrop-filter: blur(6px); }
 .dialog-close { position: absolute; top: 1rem; right: 1rem; width: 38px; height: 38px; border: 1px solid var(--glass-border); border-radius: 50%; background: transparent; color: var(--text-primary); cursor: pointer; }
@@ -175,6 +229,8 @@ footer { padding: 2rem 1rem 1rem; color: var(--text-secondary); text-align: cent
   .dialog-flow > i { transform: rotate(90deg); }
   .dialog-flow span { width: 100%; min-height: 64px; }
   .demo-dialog { padding: 2rem 1.3rem 1.5rem; }
+  .chat-launcher { right: 1rem; bottom: 6.3rem; }
+  .lalia-chat { right: 1rem; bottom: 10.5rem; max-height: calc(100vh - 12rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {

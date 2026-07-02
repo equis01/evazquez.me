@@ -33,7 +33,7 @@
         },
         {
             "source": "/lalia",
-            "destination": "/portafolio/proyectos/lalia/index.html"
+            "destination": "/lalia/index.html"
         }
     ]
 }

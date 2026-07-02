@@ -138,3 +138,72 @@ if (document.readyState === 'complete') {
 } else {
   window.addEventListener('load', hideLoader, { once: true });
 }
+
+const chatAnswers = {
+  capabilities: {
+    question: '¿Qué puede hacer?',
+    answer: 'LalIA puede conversar contigo, redactar y organizar contenido, analizar información y ayudarte a convertir una idea en una aplicación. Sus capacidades pueden crecer sin obligarte a cambiar de plataforma.'
+  },
+  operation: {
+    question: '¿Cómo funciona?',
+    answer: 'Tú explicas el objetivo con tus propias palabras. LalIA identifica qué tipo de ayuda necesitas, conserva el contexto y usa la capacidad adecuada para avanzar contigo paso a paso.'
+  },
+  audience: {
+    question: '¿Quién puede usarlo?',
+    answer: 'Está pensado para personas, creadores, estudiantes, profesionales y pequeños equipos. No necesitas saber programar ni conocer comandos técnicos para empezar.'
+  },
+  purpose: {
+    question: '¿Para qué sirve?',
+    answer: 'Sirve para reducir el tiempo entre una idea y un resultado útil: aclarar decisiones, producir contenido, entender datos o crear un primer producto sin saltar entre muchas herramientas.'
+  }
+};
+
+const chatLauncher = document.getElementById('chat-launcher');
+const chatPanel = document.getElementById('lalia-chat');
+const chatClose = document.getElementById('chat-close');
+const chatMessages = document.getElementById('chat-messages');
+let chatBusy = false;
+
+function setChatOpen(open) {
+  chatPanel.classList.toggle('open', open);
+  chatPanel.setAttribute('aria-hidden', String(!open));
+  chatLauncher.setAttribute('aria-expanded', String(open));
+  if (open) chatClose.focus();
+}
+
+function addChatMessage(className, text) {
+  const message = document.createElement('div');
+  message.className = className;
+  message.textContent = text;
+  chatMessages.appendChild(message);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+chatLauncher.addEventListener('click', () => setChatOpen(!chatPanel.classList.contains('open')));
+chatClose.addEventListener('click', () => setChatOpen(false));
+
+document.getElementById('chat-questions').addEventListener('click', event => {
+  const button = event.target.closest('[data-question]');
+  if (!button || chatBusy) return;
+
+  const response = chatAnswers[button.dataset.question];
+  chatBusy = true;
+  addChatMessage('user-message', response.question);
+
+  const typing = document.createElement('div');
+  typing.className = 'chat-typing';
+  typing.setAttribute('aria-label', 'LalIA está escribiendo');
+  typing.innerHTML = '<span></span><span></span><span></span>';
+  chatMessages.appendChild(typing);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  setTimeout(() => {
+    typing.remove();
+    addChatMessage('guide-message', response.answer);
+    chatBusy = false;
+  }, 450);
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && chatPanel.classList.contains('open')) setChatOpen(false);
+});
